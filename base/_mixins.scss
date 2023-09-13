@@ -1,0 +1,40 @@
+@mixin light($fs: 2.1rem, $lh: 3.3rem, $c: black) {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  color: $c;
+  font-size: $fs;
+  line-height: $lh;
+}
+
+@mixin responsive {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@mixin regular($fs: 2.1rem, $lh: 3.3rem, $c: black) {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  color: $c;
+  font-size: $fs;
+  line-height: $lh;
+}
+@mixin bold($fs: 5rem, $lh: 6.6rem, $c: black) {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  color: $c;
+  font-size: $fs;
+  line-height: $lh;
+}
+
+@mixin icon($id, $color: black, $size: 32px) {
+  width: $size;
+  height: $size;
+  -webkit-mask-image: url('/icons/icons.svg#{"#"}#{$id}');
+  mask-image: url('/icons/icons.svg#{"#"}#{$id}');
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  background-color: $color;
+}

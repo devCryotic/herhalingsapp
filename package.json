@@ -1,0 +1,16 @@
+{
+  "name": "1.-herhalingsapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "vite --open --host",
+    "build": "vite build",
+    "preview": "vite preview --open --host",
+    "deploy": "surge ./dist thecocktaildb_david.surge.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
