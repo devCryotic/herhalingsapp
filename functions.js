@@ -1,4 +1,4 @@
-const getAllCocktails = async () => {
+export const getAllCocktails = async () => {
   // zoek naar de api endpoint dat alle cocktails opvraagt beginnend met de letter L
   // thecocktaildb
   // fetch met .then.catch
@@ -11,12 +11,14 @@ const getAllCocktails = async () => {
   //     .then((data) => console.log(data.drinks.map((drink) => drink.strDrink)))
   //     .catch((err) => console.log(err));
 
-  // array with all fetch promises
-  const allDownloads = [
-    fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a"),
-    fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=b"),
-    fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=c"),
-  ];
+  // array with all fetch promises from list of all alfabet letters
+  const allDownloads = new Array(26)
+    .fill(65)
+    .map((el, i) => String.fromCharCode(el + i))
+    .map((ltr) =>
+      fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${ltr}`)
+    );
+
   //we wait for all fetch promises to resolve
   const allResponses = await Promise.all(allDownloads);
   // we wait to get all the json data
@@ -28,6 +30,17 @@ const getAllCocktails = async () => {
     .filter((data) => data.drinks != null) // filter out all the drinks that have no cocktails = null
     .map((data) => data.drinks);
   // we flat all the cocktails so they are all in one big array
-  console.log(allDrinks.flat().map((d) => d.strDrink));
+
+  // allDrinks.flat().map(function (drinkObj) {
+  //   return {
+  //     naam: drinkObj.strDrink,
+  //     id: drinkObj.idDrink,
+  //     foto: drinkObj.strDrinkThumb,
+  //   };
+  // })
+  return allDrinks.flat().map(({ strDrink, idDrink, strDrinkThumb }) => ({
+    strDrink,
+    idDrink,
+    strDrinkThumb,
+  }));
 };
-getAllCocktails();
