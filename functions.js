@@ -11,15 +11,23 @@ const getAllCocktails = async () => {
   //     .then((data) => console.log(data.drinks.map((drink) => drink.strDrink)))
   //     .catch((err) => console.log(err));
 
+  // array with all fetch promises
   const allDownloads = [
-    fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=l"),
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a"),
     fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=b"),
-    fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=d"),
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=c"),
   ];
+  //we wait for all fetch promises to resolve
   const allResponses = await Promise.all(allDownloads);
-  const allDatas = await Promise.all(allResponses.map((r) => r.json()));
-  const allDrinks = allDatas.map((d) => d.drinks);
-
+  // we wait to get all the json data
+  const allDatas = await Promise.all(
+    allResponses.map((responseObj) => responseObj.json())
+  );
+  // from every dataObject we keep only the .drinks
+  const allDrinks = allDatas
+    .filter((data) => data.drinks != null) // filter out all the drinks that have no cocktails = null
+    .map((data) => data.drinks);
+  // we flat all the cocktails so they are all in one big array
   console.log(allDrinks.flat().map((d) => d.strDrink));
 };
 getAllCocktails();
