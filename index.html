@@ -7,6 +7,17 @@
     <script src="./main.js" type="module"></script>
   </head>
   <body>
-    <h1>The Cocktail DB</h1>
+    <div class="app">
+      <h1 class="app__header">The Cocktail DB</h1>
+      <ul class="app__grid"></ul>
+    </div>
+    <template id="gridItem">
+      <li class="app__grid__item">
+        <a href="#">
+          <img src="%FOTO%" alt="%NAAM%" />
+          <p>%NAAM%</p>
+        </a>
+      </li>
+    </template>
   </body>
 </html>

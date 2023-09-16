@@ -5,11 +5,18 @@
   font-size: $fs;
   line-height: $lh;
 }
-
 @mixin responsive {
   display: block;
   width: 100%;
   height: auto;
+}
+@mixin grid($min: 200px, $gap: 2rem) {
+  gap: $gap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min($min, 100%), 1fr));
+  img {
+    @include responsive;
+  }
 }
 
 @mixin regular($fs: 2.1rem, $lh: 3.3rem, $c: black) {
