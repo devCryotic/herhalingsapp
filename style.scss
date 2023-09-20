@@ -12,6 +12,8 @@
   padding: 2rem;
   &__header {
     @include bold(4rem, 5rem, $pink);
+    display: flex;
+    justify-content: space-between;
   }
   &__grid {
     @include grid(200px, 2rem);
@@ -21,7 +23,7 @@
       &:hover {
         .app__grid__item__text {
           bottom: 0;
-          // opacity: 1;
+          opacity: 1;
         }
         .app__grid__item__image {
           transform: scale(1.15);
@@ -31,11 +33,11 @@
         transition: all 150ms;
       }
       &__text {
-        transition: all 150ms 75ms;
+        transition: bottom 150ms 0ms, opacity 800ms 75ms;
         position: absolute;
         left: 0;
         bottom: -4rem;
-        // opacity: 0;
+        opacity: 0;
         background-color: rgba($blue, 0.8);
         @include bold(2rem, 2rem, white);
         padding: 1rem;

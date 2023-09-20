@@ -8,7 +8,16 @@
   </head>
   <body>
     <div class="app">
-      <h1 class="app__header">The Cocktail DB</h1>
+      <header class="app__header">
+        <h1>The Cocktail DB</h1>
+        <p>
+          showing <span class="app__header__start">x</span> from total
+          <span class="app__header__total">y</span>
+        </p>
+      </header>
+      <div>
+        <input type="text" id="filterField" />
+      </div>
       <ul class="app__grid"></ul>
     </div>
     <template id="gridItem">
