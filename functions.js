@@ -12,7 +12,7 @@ export const getAllCocktails = async () => {
   //     .catch((err) => console.log(err));
 
   // array with all fetch promises from list of all alfabet letters
-  const allDownloads = new Array(1) // 2=Enkel A en B, 26=A-Z
+  const allDownloads = new Array(2) // 2=Enkel A en B, 26=A-Z
     .fill(65)
     .map((el, i) => String.fromCharCode(el + i))
     .map((ltr) =>
