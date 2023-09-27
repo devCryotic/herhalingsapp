@@ -13,7 +13,8 @@ async function main() {
     document.querySelector("#likedgridItem").innerHTML;
   const allCocktails = await getAllCocktails();
   let filterField = "";
-  const likedCocktails = ["15182", "12560", "13162"];
+  const likedCocktails =
+    JSON.parse(window.localStorage.getItem("likedcocktails")) ?? [];
   renderCocktails({
     grid,
     gridItemTemplate,
@@ -34,6 +35,7 @@ async function main() {
     //trigger oninput manually
     document.querySelector("#filterField").dispatchEvent(new Event("input"));
   };
+
   document.querySelector("#filterField").oninput = (e) => {
     filterField = e.target.value;
     renderCocktails({
@@ -53,6 +55,42 @@ async function main() {
       likedCocktails.splice(
         likedCocktails.findIndex((cocktailId) => cocktailId === id),
         1
+      );
+      window.localStorage.setItem(
+        "likedcocktails",
+        JSON.stringify(likedCocktails)
+      );
+      renderCocktails({
+        grid,
+        gridItemTemplate,
+        allCocktails,
+        filterField,
+        likedCocktails,
+      });
+      renderLikedCocktails({
+        likedGrid,
+        likedGridItemTemplate,
+        likedCocktails,
+        allCocktails,
+      });
+    }
+  };
+
+  grid.onclick = function (e) {
+    console.log(e);
+    if (e.target.classList[0] === "app__grid__item__icon") {
+      // console.log("clicked on heart");
+      if (e.target.classList[1] === "app__grid__item__icon--heart-o") {
+        likedCocktails.push(e.target.parentElement.dataset.id);
+      } else {
+        likedCocktails.splice(
+          likedCocktails.indexOf(e.target.parentElement.dataset.id),
+          1
+        );
+      }
+      window.localStorage.setItem(
+        "likedcocktails",
+        JSON.stringify(likedCocktails)
       );
       renderCocktails({
         grid,
