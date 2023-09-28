@@ -77,7 +77,19 @@ async function main() {
   };
 
   grid.onclick = function (e) {
-    console.log(e);
+    if (e.target.parentElement.nodeName === "A") {
+      e.preventDefault();
+      const id = e.target.parentElement.parentElement.dataset.id;
+      const name = allCocktails.find((c) => c.idDrink === id).strDrink;
+      history.pushState(
+        {
+          id,
+        },
+        null,
+        "/cocktail/" + name.toLowerCase().replaceAll(" ", "-")
+      );
+      showCocktail(id);
+    }
     if (e.target.classList[0] === "app__grid__item__icon") {
       // console.log("clicked on heart");
       if (e.target.classList[1] === "app__grid__item__icon--heart-o") {
@@ -107,6 +119,16 @@ async function main() {
       });
     }
   };
+
+  window.onpopstate = (e) => {
+    if (e.state.id) {
+      showCocktail(e.state.id);
+    }
+  };
+
+  function showCocktail(id) {
+    console.log(id);
+  }
 }
 
 main();

@@ -13,7 +13,7 @@
 @mixin grid($min: 200px, $gap: 2rem) {
   gap: $gap;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min($min, 100%), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(#{$min}, 100%), 1fr));
   img {
     @include responsive;
   }
