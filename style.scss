@@ -3,6 +3,9 @@
 @use "./base/fonts";
 @use "./base/mixins" as *;
 
+body {
+  overflow-y: scroll;
+}
 .app {
   width: 90%;
   margin: 0 auto;
@@ -115,4 +118,25 @@
       }
     }
   }
+}
+
+.popup {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  z-index: 2;
+  position: fixed;
+  display: none;
+  backdrop-filter: blur(10px);
+  &.open {
+    display: block;
+  }
+}
+
+body:has(.popup.open) {
+  overflow-y: scroll; //altijd scroll tonen, ook als niet nodig
+  /* bug: after scrolling and opening popup body goes to scrolltop 0*/
+  position: fixed;
+  width: 100%;
 }

@@ -48,9 +48,9 @@ async function main() {
   };
 
   likedGrid.onclick = (e) => {
+    e.preventDefault();
     if (e.target.className === "removeLike") {
       //href niet volgen
-      e.preventDefault();
       const id = e.target.parentElement.dataset.id;
       likedCocktails.splice(
         likedCocktails.findIndex((cocktailId) => cocktailId === id),
@@ -77,8 +77,8 @@ async function main() {
   };
 
   grid.onclick = function (e) {
+    e.preventDefault();
     if (e.target.parentElement.nodeName === "A") {
-      e.preventDefault();
       const id = e.target.parentElement.parentElement.dataset.id;
       const name = allCocktails.find((c) => c.idDrink === id).strDrink;
       history.pushState(
